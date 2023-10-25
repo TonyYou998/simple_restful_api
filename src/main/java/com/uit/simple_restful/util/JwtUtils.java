@@ -20,7 +20,7 @@ import org.springframework.util.StringUtils;
 @Component
 public class JwtUtils {
     private final Logger logger= LoggerFactory.getLogger(this.getClass());
-     private Long jwtExpiration = 108000L;
+     private Long jwtExpiration = 10800000000000L;
     private String authHeader = "Authorization";
     private String tokenPrefix = "Bearer ";
     final String jwtSecret="tanvuu998";
