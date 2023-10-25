@@ -60,8 +60,10 @@ public class TaskController {
             return ResponseHandler.getResponse(HttpStatus.BAD_REQUEST, errorMessage);
         }
         TaskResponseDto taskResponseDto= taskService.updateTaskById(id,dto);
-    
-        return ResponseHandler.getResponse(taskResponseDto, HttpStatus.OK);
+        if(taskResponseDto!=null)
+            return ResponseHandler.getResponse(taskResponseDto, HttpStatus.OK);
+        String errorMessage = "ID not existed";
+        return ResponseHandler.getResponse(HttpStatus.OK,errorMessage);
        
     }
     @DeleteMapping("/tasks/{id}")

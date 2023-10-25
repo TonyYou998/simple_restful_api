@@ -78,6 +78,8 @@ public class TaskServiceImpl  implements TaskService{
         try {
             Long taskId=Long.parseLong(id);
             Task task= taskRepository.findById(taskId).orElse(null);
+            if(task==null)
+                return null;
             task.setTitle(dto.getTitle());
             task.setDescription(dto.getDescription());
             task.setCompleted(Boolean.valueOf(dto.getCompleted()));
