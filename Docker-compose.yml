@@ -1,0 +1,17 @@
+services:
+  hostDb:
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=1234
+      - MYSQL_DATABASE=simple_restful
+    ports:
+      - "3306:3306"
+    networks:
+      - uit
+    volumes:
+      - simpleDb:/var/lib/mysql
+volumes:
+  simpleDb:
+networks:
+  uit:
+    driver: bridge
