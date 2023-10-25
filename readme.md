@@ -16,8 +16,7 @@ type the following command to start my project or simply use an IDE like Intelli
 mvn install -DskipTests
 ```
 this command  orders maven to dowload all required dependencies and adds them to repository folder.Also, create a jar file of my application. -DskipTests ask maven to skip test phase.
-```
-    mvn spring-boot:run
+```mvn spring-boot:run
 ```
 this command will start the project, the application by default will run on http://localhost:8080.
 Remember, make sure you already had a mysql database running on port 3306 name simple_restful with 1234 as password in your machine. Take a look at application.properties,plss.
