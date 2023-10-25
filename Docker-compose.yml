@@ -1,5 +1,5 @@
 services:
-  hostDb:
+  simpleDb:
     image: mysql:5.7
     environment:
       - MYSQL_ROOT_PASSWORD=1234
@@ -10,6 +10,25 @@ services:
       - uit
     volumes:
       - simpleDb:/var/lib/mysql
+  api:
+    image: tonyyou998/simple_restful_api:1.0.0
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://simpleDb:3306/simple_restful
+      SPRING_JPA_HIBERNATE_DLL-AUTO: create-drop
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 1234
+    networks:
+      - uit
+    depends_on:
+      - simpleDb
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 2
+        window: 120s
 volumes:
   simpleDb:
 networks:
