@@ -1,7 +1,6 @@
 package com.uit.simple_restful.seeder;
 
 import com.uit.simple_restful.entity.Task;
-import com.uit.simple_restful.entity.User;
 import com.uit.simple_restful.repository.TaskRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.context.event.ContextRefreshedEvent;

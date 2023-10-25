@@ -3,7 +3,6 @@ package com.uit.simple_restful.seeder;
 import com.uit.simple_restful.entity.User;
 import com.uit.simple_restful.repository.UserRepository;
 import lombok.AllArgsConstructor;
-import org.hibernate.event.spi.RefreshContext;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.security.crypto.password.PasswordEncoder;

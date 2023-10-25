@@ -3,13 +3,14 @@ package com.uit.simple_restful.controller;
 import com.uit.simple_restful.dto.TaskDto;
 import com.uit.simple_restful.dto.TaskResponseDto;
 import com.uit.simple_restful.dto.UpdateTaskDto;
+import com.uit.simple_restful.helper.ResponseHandler;
 import com.uit.simple_restful.service.TaskService;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,46 +29,45 @@ public class TaskController {
     public ResponseEntity<Object> createNewTask(@RequestBody @Valid TaskDto dto, BindingResult result) {
         if (result.hasErrors()) {
             String errorMessage = "Title and description are required";
-            return ResponseEntity.badRequest().body(errorMessage);
+            return ResponseHandler.getResponse(HttpStatus.BAD_REQUEST,errorMessage);
         }
         TaskResponseDto responseDto= taskService.createNewTask( dto);
-        if(responseDto!=null)
-            return ResponseEntity.ok(responseDto);
-        return ResponseEntity.status(500).build();
+    
+        return ResponseHandler.getResponse(responseDto, HttpStatus.CREATED);
 
     }
     @GetMapping("/tasks")
     public ResponseEntity<Object> getAllTask(){
         List<TaskResponseDto> listTaskResponse= taskService.getAllTasks();
-        if(listTaskResponse!=null)
-            return ResponseEntity.ok(listTaskResponse);
-        return ResponseEntity.status(500).build();
+            return ResponseHandler.getResponse(listTaskResponse, HttpStatus.OK);
 
     }
     @GetMapping("/tasks/{id}")
     public ResponseEntity<Object> getTaskById(@PathVariable("id")  String id){
         TaskResponseDto responseDto= taskService.getTaskById(id);
+        
         if(responseDto!=null){
-            return ResponseEntity.ok(responseDto);
+            return ResponseHandler.getResponse(responseDto, HttpStatus.OK);
         }
-        return ResponseEntity.badRequest().body("Task not existed");
+        String errorMessage = "ID not existed";
+        return ResponseHandler.getResponse(HttpStatus.BAD_REQUEST, errorMessage);
 
     }
     @PutMapping("/tasks/{id}")
     public ResponseEntity<Object> updateTaskById(@PathVariable("id") String id, @RequestBody UpdateTaskDto dto, BindingResult result){
         if (result.hasErrors()) {
             String errorMessage = "Title and description are required";
-            return ResponseEntity.badRequest().body(errorMessage);
+            return ResponseHandler.getResponse(HttpStatus.BAD_REQUEST, errorMessage);
         }
         TaskResponseDto taskResponseDto= taskService.updateTaskById(id,dto);
-        if(taskResponseDto !=null)
-            return ResponseEntity.ok(taskResponseDto);
-        return ResponseEntity.status(500).build();
+    
+        return ResponseHandler.getResponse(taskResponseDto, HttpStatus.OK);
+       
     }
     @DeleteMapping("/tasks/{id}")
-    public ResponseEntity<String> deleteTaskById(@PathVariable("id") String id){
+    public ResponseEntity<Object> deleteTaskById(@PathVariable("id") String id){
         String message=taskService.deleteTaskById(id);
-        return ResponseEntity.ok(message);
+        return ResponseHandler.getResponse(message, HttpStatus.OK);
 
     }
     }

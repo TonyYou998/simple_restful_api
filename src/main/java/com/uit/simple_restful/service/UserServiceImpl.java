@@ -3,6 +3,8 @@ package com.uit.simple_restful.service;
 import com.uit.simple_restful.dto.GetUserDto;
 import com.uit.simple_restful.dto.UserDto;
 import com.uit.simple_restful.util.JwtUtils;
+
+import jakarta.security.auth.message.AuthException;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,19 +23,13 @@ public class UserServiceImpl implements UserService {
     private JwtUtils jwtUtils;
     @Override
     public UserDto login(GetUserDto request) {
-        UserDto response = new UserDto();
-
-
-        try {
+        UserDto response = new UserDto();        
             Authentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
             SecurityContextHolder.getContext().setAuthentication(auth);
             String token = jwtUtils.generateJwtToken(auth);
             response.setToken(token);
-
-        } catch (AuthenticationException e) {
-                logger.info(e.getMessage());
-
-        }
-        return response;
+             return response;
+       
+       
     }
 }

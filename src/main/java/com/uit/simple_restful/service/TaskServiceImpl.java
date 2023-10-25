@@ -21,23 +21,21 @@ public class TaskServiceImpl  implements TaskService{
     private TaskRepository taskRepository;
     @Override
     public TaskResponseDto createNewTask(TaskDto dto) {
-        Task newTask=new Task(dto.getTitle(),dto.getDescription());
-        newTask= taskRepository.save(newTask);
-        if(newTask !=null){
+      
+            Task newTask=new Task(dto.getTitle(),dto.getDescription());
+            newTask= taskRepository.save(newTask);
             TaskResponseDto responseDto=new TaskResponseDto();
             responseDto.setId(newTask.getId().toString());
             responseDto.setTitle(newTask.getTitle());
             responseDto.setDescription(newTask.getDescription());
             responseDto.setCompleted(newTask.getCompleted().toString());
             return responseDto;
-        }
-        return null;
+
     }
 
     @Override
     public List<TaskResponseDto> getAllTasks() {
         List<Task> listTask=taskRepository.findAll();
-        if(listTask.size()>0){
             List<TaskResponseDto> taskResponseDtoList=new ArrayList<>();
 
             listTask.forEach(task->{
@@ -49,8 +47,7 @@ public class TaskServiceImpl  implements TaskService{
                 taskResponseDtoList.add(taskResponseDto);
             });
             return taskResponseDtoList;
-        }
-        return null;
+
     }
 
     @Override
@@ -70,7 +67,7 @@ public class TaskServiceImpl  implements TaskService{
         }
         catch (NumberFormatException e){
             logger.info(e.getMessage());
-            return null;
+            throw new NumberFormatException();
         }
 
         return null;
@@ -95,9 +92,9 @@ public class TaskServiceImpl  implements TaskService{
             }
 
         }
-        catch (NumberFormatException e){
+         catch (NumberFormatException e){
             logger.info(e.getMessage());
-            return null;
+            throw new NumberFormatException();
         }
         return null;
     }
@@ -120,8 +117,7 @@ public class TaskServiceImpl  implements TaskService{
         }
         catch (NumberFormatException e){
             logger.info(e.getMessage());
-            message.append("Invalid ID");
-            return message.toString();
+          throw new NumberFormatException();
         }
 
 
