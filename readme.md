@@ -8,5 +8,6 @@
 To run the project with Docker container a Docker Desktop application (Window) is required
 open your terminal in the root of project (where you see the Docker-compose.yml file)
 type  ```docker-compose up -d```
-
+Afterwards, you will see 2 containers are running inside your docker
+![Cat image](https://example.com/cat.jpg)
 
