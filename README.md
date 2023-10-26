@@ -23,14 +23,6 @@ this command will start the project, the application by default will run on http
 Remember, make sure you already had a mysql database running on port 3306 name simple_restful with 1234 as password in your machine. Take a look at application.properties,plss.
 
 ## 4. Test the application
-
-I added a postman collection to the source code, simply import it to Postman for testing.
-As i mentioned above, with Post,Put and Delete method require authorization so i had create 2 api which are not required by the assessment http://localhost:8080/api/v1/user/login and  http://localhost:8080/api/v1/user/get to login and get admin's account, detail apis's method can be found in postman collection in my source code.
-=======
-I added a postman collection to the source code, simply use it for testing. I also implemented some seeders so that you can quickly test my apis without creating new tasks.
-As i mentioned above, with Post,Put and Delete methods require authorization so i had create 2 api which are not required by the assessment http://localhost:8080/api/v1/user/login and  http://localhost:8080/api/v1/user/get to login and get admin's account, detail apis's method can be found in postman collection in my source code.
-
-=======
 I added a postman collection to the source code, simply import to Postman and use it for testing. I also implemented some seeders so that you can quickly test my apis without creating new tasks.
 As i mentioned above, with Post,Put and Delete methods require authorization so i had create 2 api which are not required by the assessment http://localhost:8080/api/v1/user/login and  http://localhost:8080/api/v1/user/get to login and get admin's account, detail apis's method can be found in postman collection in my source code.
 
