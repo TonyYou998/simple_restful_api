@@ -27,5 +27,5 @@ I added a postman collection to the source code, simply import to Postman and us
 As i mentioned above, with Post,Put and Delete methods require authorization so i had create 2 api which are not required by the assessment http://localhost:8080/api/v1/user/login and  http://localhost:8080/api/v1/user/get to login and get admin's account, detail apis's method can be found in postman collection in my source code.
 
 After login with the admin account you are now have fully permission to modify all tasks, just make sure  setting ```Authentication Bearer YOUR_TOKEN``` in the requets's header.
-If there are any issue when testing my application don't be hesitate to contact me via ```tanvuu998@gmail.com```
+If there is any issue when testing my application don't be hesitate to contact me via ```tanvuu998@gmail.com```
 
