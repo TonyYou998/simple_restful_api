@@ -17,14 +17,19 @@ mvn install -DskipTests
 ```
 this command  orders maven to dowload all required dependencies and adds them to repository folder.Also, create a jar file of my application. -DskipTests ask maven to skip test phase.
 ```
-    mvn spring-boot:run
+mvn spring-boot:run
 ```
 this command will start the project, the application by default will run on http://localhost:8080.
 Remember, make sure you already had a mysql database running on port 3306 name simple_restful with 1234 as password in your machine. Take a look at application.properties,plss.
 
 ## 4. Test the application
+<<<<<<< HEAD:README.md
 I added a postman collection to the source code, simply import it to Postman for testing.
 As i mentioned above, with Post,Put and Delete method require authorization so i had create 2 api which are not required by the assessment http://localhost:8080/api/v1/user/login and  http://localhost:8080/api/v1/user/get to login and get admin's account, detail apis's method can be found in postman collection in my source code.
+=======
+I added a postman collection to the source code, simply use it for testing. I also implemented some seeders so that you can quickly test my apis without creating new tasks.
+As i mentioned above, with Post,Put and Delete methods require authorization so i had create 2 api which are not required by the assessment http://localhost:8080/api/v1/user/login and  http://localhost:8080/api/v1/user/get to login and get admin's account, detail apis's method can be found in postman collection in my source code.
+>>>>>>> c95b2c2cb3db1e2db5d4fd0bfa23806c4d3ebf86:readme.md
 After login with the admin account you are now have fully permission to modify all tasks, just make sure  setting ```Authentication Bearer YOUR_TOKEN``` in the requets's header.
 If there are any issue when testing my application don't be hesitate to contact me via ```tanvuu998@gmail.com```
 
