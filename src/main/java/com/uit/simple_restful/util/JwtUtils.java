@@ -20,10 +20,7 @@ import org.springframework.util.StringUtils;
 @Component
 public class JwtUtils {
     private final Logger logger= LoggerFactory.getLogger(this.getClass());
-     private Long jwtExpiration = 10800000000000L;
-    private String authHeader = "Authorization";
-    private String tokenPrefix = "Bearer ";
-    final String jwtSecret="tanvuu998";
+
     public String generateJwtToken(Authentication authentication){
 //        UserDetails userDetails=(UserDetails) authentication.getPrincipal();
         Date now=new Date();
@@ -38,30 +35,23 @@ public class JwtUtils {
                 .claim("roles", roles)
                 .setSubject(userDetailsDto.getUsername())
                 .setIssuedAt(now)
-                .setExpiration(new Date(now.getTime()+jwtExpiration))
-                .signWith(SignatureAlgorithm.HS512,jwtSecret)
+                .setExpiration(new Date(now.getTime()+Constants.jwtExpiration))
+                .signWith(SignatureAlgorithm.HS512, Constants.jwtSecret)
                 .compact();
     }
 
     public String getJwtTokenFromRequest(HttpServletRequest request) {
-        String header=request.getHeader(authHeader);
-        if(StringUtils.hasText(header)&&header.startsWith(tokenPrefix)){
-            return header.substring(tokenPrefix.length());
+        String header=request.getHeader(Constants.authHeader);
+        if(StringUtils.hasText(header)&&header.startsWith(Constants.tokenPrefix)){
+            return header.substring(Constants.tokenPrefix.length());
         }
         return null;
 
     }
-//    public String getTokenFromHeader(String authHeader){
-//        if(StringUtils.hasText(authHeader) && authHeader.startsWith(tokenPrefix)){
-//            return authHeader.substring(tokenPrefix.length());
-//        }
-//        return null;
-//
-//    }
 
     public boolean validadteJwtToken(String token) {
         try {
-            Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token);
+            Jwts.parser().setSigningKey(Constants.jwtSecret).parseClaimsJws(token);
             return true;
         } catch (ExpiredJwtException | MalformedJwtException | IllegalArgumentException | UnsupportedJwtException e) {
             logger.info(e.getMessage());
@@ -71,11 +61,11 @@ public class JwtUtils {
     }
 
     public String getUsernameFromToken(String token) {
-        return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
+        return Jwts.parser().setSigningKey(Constants.jwtSecret).parseClaimsJws(token).getBody().getSubject();
     }
 
     public String getEmailFromToken(String token) {
-        return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().get("email", String.class);
+        return Jwts.parser().setSigningKey(Constants.jwtSecret).parseClaimsJws(token).getBody().get("email", String.class);
     }
     
 }

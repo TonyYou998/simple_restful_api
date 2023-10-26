@@ -6,6 +6,7 @@ import com.uit.simple_restful.dto.TaskResponseDto;
 import com.uit.simple_restful.dto.UpdateTaskDto;
 import com.uit.simple_restful.entity.Task;
 import com.uit.simple_restful.repository.TaskRepository;
+import com.uit.simple_restful.util.Constants;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -109,11 +110,11 @@ public class TaskServiceImpl  implements TaskService{
             Task task=taskRepository.findById(Long.parseLong(id)).orElse(null);
             if(task!=null){
                 taskRepository.delete(task);
-                message.append("Task deleted successfully");
+                message.append(Constants.Task_Delete_Success);
                 return message.toString();
             }
             else{
-                message.append("Task is not existed");
+                message.append(Constants.Task_Not_Existed);
                 return message.toString();
             }
         }
